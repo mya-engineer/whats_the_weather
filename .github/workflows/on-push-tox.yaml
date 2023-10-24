@@ -1,0 +1,21 @@
+name: On Push Tox Tests
+run-name: tox tests on `${{ github.sha }}` in `${{ github.ref }}`
+on: [push]
+jobs:
+  run-tox:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+    steps:
+      - run: echo "tox tests on `${{ github.sha }}` in `${{ github.ref }}`"
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install tox
+        run: pip install tox
+      - name: Run tox
+        run: tox
