@@ -1,0 +1,9 @@
+tox
+mypy
+types-requests
+pylint
+flake8
+black
+isort
+bandit
+interrogate
